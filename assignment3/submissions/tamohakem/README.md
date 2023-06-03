@@ -298,3 +298,4 @@ By implementing these strategies, an organization can enhance visibility of work
 | 9  | Blue/Green deployments       | methodology for releasing new code into the production environment whose purpose is to reduce software downtime, make it easy to roll back new changes, and avoid service interruptions to applications with critical up-time requirements.   |
 | 10 | Cluster       |  A set of connected computers that work together to enable load balancing, auto scaling and high availability.   |
 
+
