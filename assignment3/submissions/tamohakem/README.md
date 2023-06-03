@@ -1,6 +1,8 @@
 ## My name is tamohakem Outcomer and please file below my submission
 ## Kubernetes, Docker, Containerisation and Virtualisation
+
 1. What is a hypervisor and where does it sit in the server virtualisation stack?
+
 A hypervisor, also known as a virtual machine monitor or VMM, is software that creates and runs virtual machines (VMs). A hypervisor allows one host computer to support multiple guest VMs by virtually sharing its resources, such as memory and processing. 
 There are 2 different types of hypervisors that can be used for virtualization: type 1 and type 2 hypervisors.
 Type 1
@@ -20,8 +22,11 @@ Examples of a type 2 hypervisors are: VMware Workstation and Oracle VirtualBox .
 
 A container runtime is a software component responsible for running and managing containers on a host system. It provides an environment for containers to execute and handles various container-related operations such as starting, stopping, pausing, and managing container resources.
 The two most common container runtimes are:
-1.Docker: Docker is one of the most popular container runtimes. It simplifies the containerization process by providing an easy-to-use interface and a comprehensive set of tools. Docker uses the Docker Engine as its container runtime, which leverages technologies like namespaces, control groups, and union file systems to isolate and manage containers.
-2.Containerd: Containerd is an open-source container runtime developed under the auspices of the Cloud Native Computing Foundation (CNCF). It focuses on providing a minimalistic and stable runtime for container execution, emphasizing compatibility and extensibility.
+
+a.Docker: Docker is one of the most popular container runtimes. It simplifies the containerization process by providing an easy-to-use interface and a comprehensive set of tools. Docker uses the Docker Engine as its container runtime, which leverages technologies like namespaces, control groups, and union file systems to isolate and manage containers.
+
+b.Containerd: Containerd is an open-source container runtime developed under the auspices of the Cloud Native Computing Foundation (CNCF). It focuses on providing a minimalistic and stable runtime for container execution, emphasizing compatibility and extensibility.
+
 
 ## Linux administration and shell scripting
 1. Use just one command to create a directory structure where the directory sports contains a directory called footballteams which itself contains africanteam which itself contains pwdkumba.
@@ -29,19 +34,56 @@ The two most common container runtimes are:
 mkdir -p sports/footballteams/africanteam/pwdkumba
 
 2. Use the tree command to display your directory structure.
-
 3. Research the following linux commands
+    a) grep
+    b) sed
+    c) awk
+    
     a) grep: The grep command is a powerful utility in Unix-like operating systems that allows you to search for specific patterns or regular expressions within files or streams of text. It stands for "Global Regular Expression Print." The basic syntax of the grep command is: grep [options] pattern [file(s)]
 
     b) sed :  The sed command, short for "stream editor," is a powerful text processing tool in Unix-like operating systems. It allows you to perform various operations on text files or streams, such as search and replace, insert or delete lines, and more. sed reads input line by line, applies specified commands to each line, and outputs the result. The basic syntax of the sed command is: sed [options] 'command' [file(s)]
 
     c) awk : The awk command is a Linux tool and programming language that allows users to process and manipulate data and produce formatted reports. The tool supports various operations for advanced text processing and facilitates expressing complex data selections. The syntax for the awk command is: awk [options] 'selection_criteria {action}' input-file > output-file
 
+
 ## CICD, Git, GitHub, GitHub Action, Infrastructure as as Code (IaC), Terraform, Packer and Ansible
 1. You create a repository in GitHub called <b>myfirstrepo</b>. You then clone this repository on your local laptop. On your laptop how would you check its remote address? How would you go about changing the remote address so that it points to repository called <b>mysecondrepo</b>?
-To check the remote address of <b>myfirstrepo</b>, I will run the command : git remote -v
- And to change the remote address to point to <b>mysecondrepo</b>, I will run the command: git remote set-url --add --push origin URL/mysecondrepo
-2.
+
+To check the remote address of <b>myfirstrepo</b>, I will run the command :
+ git remote -v
+
+ And to change the remote address to point to <b>mysecondrepo</b>, I will run the command: 
+ git remote set-url --add --push origin URL/mysecondrepo
+
+2. You have a workflow running on GitHub Action that has the following code;
+```
+jobs:
+  deploy_to_production:
+    runs-on: ubuntu-latest
+    name: deploy to production with soruce code
+    steps:
+      - name: Checkout GitHub Action
+        uses: actions/checkout@v2
+
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: deploy to production step with soruce code
+        uses: azure/spring-cloud-deploy@v1
+        with:
+          azure-subscription: ${{ env.AZURE_SUBSCRIPTION }}
+          action: deploy
+          service-name: <service instance name>
+          app-name: <app name>
+          use-staging-deployment: false
+          package: ${{ env.ASC_PACKAGE_PATH }}
+```
+Describe what you think this code is doing.
+
+This code used to deploy a production code on Azure using GitHub Actions  to run on Ubuntu-latest version
+
 
 ## System Architecture and Application Design, Cloud Computing (AWS)
 1. You have worked thus far with systems that you have had to download and install on your local laptop as well as systems hosted remotely on some external cloud. Describe in details the features and capabilities of all the systems (local and remote) that you have worked with thus far on this training. Draw a solution architecture diagram depicting these systems and where they fit in your solution landscape.
@@ -66,6 +108,7 @@ g. Infrastructure as Code (IaC): AWS provides services like AWS CloudFormation a
 
 h. Monitoring and Management: AWS provides services like Amazon CloudWatch, AWS Config, and AWS Systems Manager that help you monitor your resources, track performance metrics, set up alarms, and perform automated management tasks. These services allow you to gain insights into your AWS environment and efficiently manage your resources.
 
+
 4. AWS provide a public and a private area in which you could deploy your services. In which of these would you deploy the following services?
     a) EC2 instances
     b) DynamoDB databases
@@ -76,11 +119,11 @@ h. Monitoring and Management: AWS provides services like Amazon CloudWatch, AWS 
 Here's a tabular representation of where you would typically deploy the mentioned services in AWS:
 | Service      | Public area | Private Area    |
 | :---        |    :----:   | :---  |
-|EC2 instances|	✔️|  ✔️	|
-|DynamoDB databases|    |	✔️|
-|VPC network	|    |	✔️|
-|S3 buckets	|✔️| ✔️	|
-|IAM users		|     |	✔️|
+|EC2 instances|	x|  x	|
+|DynamoDB databases|    |	x|
+|VPC network	|    |	x|
+|S3 buckets	|x| x	|
+|IAM users		|     |	x|
 
 EC2 instances: EC2 instances can be deployed in either the public or private area of your AWS account, depending on your requirements. Public EC2 instances have public IP addresses and are accessible over the internet. Private EC2 instances reside in a private subnet within a VPC and are not directly accessible from the internet.
 
@@ -92,10 +135,10 @@ S3 buckets: S3 (Simple Storage Service) buckets can be deployed in both the publ
 
 IAM users: IAM (Identity and Access Management) users are not directly deployed as services but are created within the AWS account's identity management system. IAM users are typically managed in the private area of your AWS account. They are used to control access to AWS services and resources for individuals or entities within your organization.
 
+
 ## Site Reliability Engineering (SRE), Troubleshooting, Observability
 
 1. Research on what APM (application programming monitoring)
-
 
 APM, or Application Performance Monitoring, is a set of practices and tools used to monitor and manage the performance and availability of software applications. It involves tracking and analyzing various metrics and indicators to gain insights into the behavior and health of an application.
 
@@ -154,7 +197,8 @@ Decision Making and Optimization: Metrics provide data-driven insights that supp
 
 Overall, collecting system metrics provides visibility into the inner workings of a computer system, enabling informed decision making, proactive performance management, and efficient troubleshooting. By leveraging these metrics, organizations can improve system reliability, optimize resource usage, and enhance the overall user experience.
 
-3. What is a system log and why might you want to collect logs?
+
+3. What is an system log and why might you want to collect logs?
 
 A system log, often referred to as a log file or log data, is a record of events, activities, or messages generated by a computer system, software application, or network device. System logs capture important information about the system's operation, behavior, errors, and security events.
 
@@ -174,9 +218,10 @@ Performance Optimization and Continuous Improvement: Logs can help identify area
 
 Collecting system logs provides a comprehensive record of system behavior, errors, security events, and performance metrics. Logs serve as a valuable resource for troubleshooting, monitoring, security analysis, compliance, and continuous improvement of computer systems and applications.
 
+
 ## DevOps and Agile Transformation principles and methodology
 
-1. Communication, Collaboration and Automation are key aspects of a successful DevOps implementation. Describe why these traits are important in a DevOps transformation process.
+1. Communication, Collaboration and Automation and key aspects of a successful DevOps implementation. Describe why these traits are important in a DevOps transformation process.
 
 Communication, collaboration, and automation are crucial elements in a successful DevOps implementation. They play significant roles in facilitating efficient processes, enhancing productivity, and promoting a culture of continuous improvement. Let's delve into the importance of each of these traits in a DevOps transformation process:
 
@@ -237,6 +282,7 @@ By implementing these strategies, an organization can enhance visibility of work
 | 9  | free       |  This command is used to display memory usage statistics.   |
 | 10 | ls       | List directories and files in a directory.   |
 
+
 ## Glossary of the week - Enter new technical words you have learnt this week and their meanings.
 
 | Number   | Word | Meaning     |
@@ -251,3 +297,4 @@ By implementing these strategies, an organization can enhance visibility of work
 | 8  |  Production       |It is an environment where the application or feature is accessible to users.   |
 | 9  | Blue/Green deployments       | methodology for releasing new code into the production environment whose purpose is to reduce software downtime, make it easy to roll back new changes, and avoid service interruptions to applications with critical up-time requirements.   |
 | 10 | Cluster       |  A set of connected computers that work together to enable load balancing, auto scaling and high availability.   |
+
